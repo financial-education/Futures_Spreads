@@ -1,0 +1,46 @@
+#+title: An Introduction to Futures Spreads
+#+author: Matt Brigida, Ph.D.
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="mystyle.css" />
+
+#+BEGIN_EXPORT html :eval no
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+#+END_EXPORT
+
+#+BEGIN_EXPORT html :eval no
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+#+END_EXPORT
+
+
+* Refining
+
+
+
+* Crack Spread Calculator
+
+#+BEGIN_EXPORT html
+<style>
+.fiddle iframe {
+height: 300px //you can manually change this height
+}
+</style>
+
+<div class="fiddle">
+<script async src="https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/"></script>
+</div>
+#+END_EXPORT
+
+# <script async src="//jsfiddle.net/mbkr1/od34mwxn/1/embed/js,html,css,result/dark/"></script>
+
+* Crack Spread Over Time
+
+
+* Crush Spread
+
+
+
+[[https://www.cmegroup.com/education/files/soybean-crush-reference-guide.pdf][The CME has a great reference guide.]]
+
+* Crush Spread Calculator
+
