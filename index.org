@@ -36,11 +36,59 @@ height: 300px //you can manually change this height
 * Crack Spread Over Time
 
 
+
+
+
+#+BEGIN_SRC R :exports both :results both :cache true :session crack
+  library(EIAdata)
+
+  key <- source("~/eia_key")$value
+
+  cl1 <- getEIA("PET.RCLC1.D", key=key)
+  rb1 <- getEIA("PET.EER_EPMRR_PE1_Y35NY_DPG.D", key = key)
+  ho1 <- getEIA("PET.EER_EPD2F_PE1_Y35NY_DPG.D", key = key)
+
+  prices1 <- merge.xts(cl1, rb1, ho1)
+
+  prices1 <- prices1[complete.cases(prices1), ]
+
+  crack_bbl_1 <- 42 * (2/3) * prices1$PET.EER_EPMRR_PE1_Y35NY_DPG.D + 42 * (1/3) * prices1$PET.EER_EPD2F_PE1_Y35NY_DPG.D - prices1$PET.RCLC1.D
+
+  crack_per_1 <- crack_bbl_1 / prices1$PET.RCLC1.D
+#+END_SRC
+
+#+BEGIN_SRC R :results graphics :file crack_bbl_1.png :exports both :cache true :session crack
+  plot(crack_bbl_1["2019/"])
+#+END_SRC
+
+#+RESULTS:
+[[file:crack_bbl_1.png]]
+
+
+#+BEGIN_SRC R :results graphics :file crack_per_1.png :exports both :cache true :session crack
+  plot(crack_per_1["2019/"])
+#+END_SRC
+
+#+RESULTS:
+[[file:crack_per_1.png]]
+
+
+
 * Crush Spread
 
-
+The Crush Spread is the refining margin on Soybeans.   
 
 [[https://www.cmegroup.com/education/files/soybean-crush-reference-guide.pdf][The CME has a great reference guide.]]
 
 * Crush Spread Calculator
+
+
+* Calendar Spreads
+
+-  Calendar spreads can hedge storage costs.  
+
+* Locational Spreads
+
+-  Locational spreads hedge the cost of transportation from one point to another.
+
 
