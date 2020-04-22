@@ -36,10 +36,7 @@ height: 300px //you can manually change this height
 * Crack Spread Over Time
 
 
-
-
-
-#+BEGIN_SRC R :exports both :results both :cache true :session crack
+#+BEGIN_SRC R :exports both :results both :cache yes :session crack
   library(EIAdata)
 
   key <- source("~/eia_key")$value
@@ -57,7 +54,7 @@ height: 300px //you can manually change this height
   crack_per_1 <- crack_bbl_1 / prices1$PET.RCLC1.D
 #+END_SRC
 
-#+BEGIN_SRC R :results graphics :file crack_bbl_1.png :exports both :cache true :session crack
+#+BEGIN_SRC R :results graphics :file crack_bbl_1.png :exports both :cache yes :session crack
   plot(crack_bbl_1["2019/"])
 #+END_SRC
 
@@ -65,7 +62,7 @@ height: 300px //you can manually change this height
 [[file:crack_bbl_1.png]]
 
 
-#+BEGIN_SRC R :results graphics :file crack_per_1.png :exports both :cache true :session crack
+#+BEGIN_SRC R :results graphics :file crack_per_1.png :exports both :cache yes :session crack
   plot(crack_per_1["2019/"])
 #+END_SRC
 
@@ -80,7 +77,23 @@ The Crush Spread is the refining margin on Soybeans.
 
 [[https://www.cmegroup.com/education/files/soybean-crush-reference-guide.pdf][The CME has a great reference guide.]]
 
+* Calculating the Crush Spread
+
+Calculation from here: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&download=yes
+
+$$Crush\ Spread\ =\ (Soybean\ Meal\ in\ $\ per\ ton\ x\ 100) + (Soybean\ Oil\ in\ $ per\ 100\ lbs.\ x\ 600) – (Soybeans\ in\ cents\ per\ bu.\ x\ 50)$$
+
+
+
 * Crush Spread Calculator
+
+#+BEGIN_EXPORT html
+
+<div class="fiddle">
+<script async src="https://jsfiddle.net/mbkr1/hpur8feq/embed/result,js,html,css/dark/"></script>
+</div>
+#+END_EXPORT
+
 
 
 * Calendar Spreads

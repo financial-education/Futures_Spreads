@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-21 Tue 22:13 -->
+<!-- 2020-04-21 Tue 23:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>An Introduction to Futures Spreads</title>
@@ -233,6 +233,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -241,26 +263,27 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcf730d5">1. Refining</a></li>
-<li><a href="#org0147318">2. Crack Spread Calculator</a></li>
-<li><a href="#orgc63cb04">3. Crack Spread Over Time</a></li>
-<li><a href="#org360dab6">4. Crush Spread</a></li>
-<li><a href="#org8e2e386">5. Crush Spread Calculator</a></li>
-<li><a href="#org524fe43">6. Calendar Spreads</a></li>
-<li><a href="#org49a0d68">7. Locational Spreads</a></li>
+<li><a href="#org12b015a">1. Refining</a></li>
+<li><a href="#org6ccb7b4">2. Crack Spread Calculator</a></li>
+<li><a href="#org1b6be1a">3. Crack Spread Over Time</a></li>
+<li><a href="#org0230dbe">4. Crush Spread</a></li>
+<li><a href="#orgad0617a">5. Calculating the Crush Spread</a></li>
+<li><a href="#org32bdbe1">6. Crush Spread Calculator</a></li>
+<li><a href="#org3c18199">7. Calendar Spreads</a></li>
+<li><a href="#org4d50be9">8. Locational Spreads</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orgcf730d5" class="outline-2">
-<h2 id="orgcf730d5"><span class="section-number-2">1</span> Refining</h2>
+<div id="outline-container-org12b015a" class="outline-2">
+<h2 id="org12b015a"><span class="section-number-2">1</span> Refining</h2>
 </div>
 
 
 
-<div id="outline-container-org0147318" class="outline-2">
-<h2 id="org0147318"><span class="section-number-2">2</span> Crack Spread Calculator</h2>
+<div id="outline-container-org6ccb7b4" class="outline-2">
+<h2 id="org6ccb7b4"><span class="section-number-2">2</span> Crack Spread Calculator</h2>
 <div class="outline-text-2" id="text-2">
 <style>
 .fiddle iframe {
@@ -274,8 +297,8 @@ height: 300px //you can manually change this height
 </div>
 </div>
 
-<div id="outline-container-orgc63cb04" class="outline-2">
-<h2 id="orgc63cb04"><span class="section-number-2">3</span> Crack Spread Over Time</h2>
+<div id="outline-container-org1b6be1a" class="outline-2">
+<h2 id="org1b6be1a"><span class="section-number-2">3</span> Crack Spread Over Time</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-R"><span style="color: #268bd2;">library</span><span style="color: #839496;">(</span>EIAdata<span style="color: #839496;">)</span>
@@ -323,8 +346,8 @@ crack_per_1 <span style="color: #268bd2;">&lt;-</span> crack_bbl_1 / prices1$PET
 
 
 
-<div id="outline-container-org360dab6" class="outline-2">
-<h2 id="org360dab6"><span class="section-number-2">4</span> Crush Spread</h2>
+<div id="outline-container-org0230dbe" class="outline-2">
+<h2 id="org0230dbe"><span class="section-number-2">4</span> Crush Spread</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The Crush Spread is the refining margin on Soybeans.   
@@ -336,23 +359,45 @@ The Crush Spread is the refining margin on Soybeans.
 </div>
 </div>
 
-<div id="outline-container-org8e2e386" class="outline-2">
-<h2 id="org8e2e386"><span class="section-number-2">5</span> Crush Spread Calculator</h2>
+<div id="outline-container-orgad0617a" class="outline-2">
+<h2 id="orgad0617a"><span class="section-number-2">5</span> Calculating the Crush Spread</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&amp;download=yes">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&amp;download=yes</a>
+</p>
+
+<p>
+\[Crush\ Spread\ =\ (Soybean\ Meal\ in\ $\ per\ ton\ x\ 100) + (Soybean\ Oil\ in\ $ per\ 100\ lbs.\ x\ 600) – (Soybeans\ in\ cents\ per\ bu.\ x\ 50)\]
+</p>
+</div>
 </div>
 
 
-<div id="outline-container-org524fe43" class="outline-2">
-<h2 id="org524fe43"><span class="section-number-2">6</span> Calendar Spreads</h2>
+
+<div id="outline-container-org32bdbe1" class="outline-2">
+<h2 id="org32bdbe1"><span class="section-number-2">6</span> Crush Spread Calculator</h2>
 <div class="outline-text-2" id="text-6">
+
+<div class="fiddle">
+<script async src="https://jsfiddle.net/mbkr1/hpur8feq/embed/result,js,html,css/dark/"></script>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3c18199" class="outline-2">
+<h2 id="org3c18199"><span class="section-number-2">7</span> Calendar Spreads</h2>
+<div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>Calendar spreads can hedge storage costs.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org49a0d68" class="outline-2">
-<h2 id="org49a0d68"><span class="section-number-2">7</span> Locational Spreads</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org4d50be9" class="outline-2">
+<h2 id="org4d50be9"><span class="section-number-2">8</span> Locational Spreads</h2>
+<div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li>Locational spreads hedge the cost of transportation from one point to another.</li>
 </ul>
@@ -361,7 +406,7 @@ The Crush Spread is the refining margin on Soybeans.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida, Ph.D.</p>
-<p class="date">Created: 2020-04-21 Tue 22:13</p>
+<p class="date">Created: 2020-04-21 Tue 23:01</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
