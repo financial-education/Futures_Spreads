@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-21 Tue 23:01 -->
+<!-- 2020-05-08 Fri 19:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>An Introduction to Futures Spreads</title>
@@ -263,27 +263,27 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org12b015a">1. Refining</a></li>
-<li><a href="#org6ccb7b4">2. Crack Spread Calculator</a></li>
-<li><a href="#org1b6be1a">3. Crack Spread Over Time</a></li>
-<li><a href="#org0230dbe">4. Crush Spread</a></li>
-<li><a href="#orgad0617a">5. Calculating the Crush Spread</a></li>
-<li><a href="#org32bdbe1">6. Crush Spread Calculator</a></li>
-<li><a href="#org3c18199">7. Calendar Spreads</a></li>
-<li><a href="#org4d50be9">8. Locational Spreads</a></li>
+<li><a href="#orgec0891a">1. Refining</a></li>
+<li><a href="#org81ff7ad">2. Crack Spread Calculator</a></li>
+<li><a href="#orge883760">3. Crack Spread Over Time</a></li>
+<li><a href="#org89b2404">4. Crush Spread</a></li>
+<li><a href="#orgb319ab2">5. Calculating the Crush Spread</a></li>
+<li><a href="#org21f36c9">6. Crush Spread Calculator</a></li>
+<li><a href="#org3f21183">7. Calendar Spreads</a></li>
+<li><a href="#org4d90367">8. Locational Spreads</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org12b015a" class="outline-2">
-<h2 id="org12b015a"><span class="section-number-2">1</span> Refining</h2>
+<div id="outline-container-orgec0891a" class="outline-2">
+<h2 id="orgec0891a"><span class="section-number-2">1</span> Refining</h2>
 </div>
 
 
 
-<div id="outline-container-org6ccb7b4" class="outline-2">
-<h2 id="org6ccb7b4"><span class="section-number-2">2</span> Crack Spread Calculator</h2>
+<div id="outline-container-org81ff7ad" class="outline-2">
+<h2 id="org81ff7ad"><span class="section-number-2">2</span> Crack Spread Calculator</h2>
 <div class="outline-text-2" id="text-2">
 <style>
 .fiddle iframe {
@@ -297,8 +297,8 @@ height: 300px //you can manually change this height
 </div>
 </div>
 
-<div id="outline-container-org1b6be1a" class="outline-2">
-<h2 id="org1b6be1a"><span class="section-number-2">3</span> Crack Spread Over Time</h2>
+<div id="outline-container-orge883760" class="outline-2">
+<h2 id="orge883760"><span class="section-number-2">3</span> Crack Spread Over Time</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-R"><span style="color: #268bd2;">library</span><span style="color: #839496;">(</span>EIAdata<span style="color: #839496;">)</span>
@@ -341,13 +341,24 @@ crack_per_1 <span style="color: #268bd2;">&lt;-</span> crack_bbl_1 / prices1$PET
 <p><img src="crack_per_1.png" alt="crack_per_1.png" />
 </p>
 </div>
+
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #268bd2;">library</span><span style="color: #839496;">(</span>highcharter<span style="color: #839496;">)</span>
+<span style="color: #268bd2;">library</span><span style="color: #839496;">(</span>htmlwidgets<span style="color: #839496;">)</span>
+hc <span style="color: #268bd2;">&lt;-</span> hchart<span style="color: #839496;">(</span>crack_per_1<span style="color: #839496;">)</span> <span style="color: #268bd2;">%&gt;%</span> hc_add_theme<span style="color: #839496;">(</span>hc_theme_economist<span style="color: #2aa198;">()</span><span style="color: #839496;">)</span>
+saveWidget<span style="color: #839496;">(</span>hc, <span style="color: #2aa198;">"crack_per_1_widget.html"</span><span style="color: #839496;">)</span>
+</pre>
+</div>
+
+<iframe width="100%" height="500px" frameBorder=0 src="./crack_per_1_widget.html"></iframe>
 </div>
 </div>
 
 
 
-<div id="outline-container-org0230dbe" class="outline-2">
-<h2 id="org0230dbe"><span class="section-number-2">4</span> Crush Spread</h2>
+
+<div id="outline-container-org89b2404" class="outline-2">
+<h2 id="org89b2404"><span class="section-number-2">4</span> Crush Spread</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The Crush Spread is the refining margin on Soybeans.   
@@ -359,8 +370,8 @@ The Crush Spread is the refining margin on Soybeans.
 </div>
 </div>
 
-<div id="outline-container-orgad0617a" class="outline-2">
-<h2 id="orgad0617a"><span class="section-number-2">5</span> Calculating the Crush Spread</h2>
+<div id="outline-container-orgb319ab2" class="outline-2">
+<h2 id="orgb319ab2"><span class="section-number-2">5</span> Calculating the Crush Spread</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&amp;download=yes">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&amp;download=yes</a>
@@ -374,8 +385,8 @@ Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract
 
 
 
-<div id="outline-container-org32bdbe1" class="outline-2">
-<h2 id="org32bdbe1"><span class="section-number-2">6</span> Crush Spread Calculator</h2>
+<div id="outline-container-org21f36c9" class="outline-2">
+<h2 id="org21f36c9"><span class="section-number-2">6</span> Crush Spread Calculator</h2>
 <div class="outline-text-2" id="text-6">
 
 <div class="fiddle">
@@ -386,8 +397,8 @@ Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract
 
 
 
-<div id="outline-container-org3c18199" class="outline-2">
-<h2 id="org3c18199"><span class="section-number-2">7</span> Calendar Spreads</h2>
+<div id="outline-container-org3f21183" class="outline-2">
+<h2 id="org3f21183"><span class="section-number-2">7</span> Calendar Spreads</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>Calendar spreads can hedge storage costs.</li>
@@ -395,8 +406,8 @@ Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract
 </div>
 </div>
 
-<div id="outline-container-org4d50be9" class="outline-2">
-<h2 id="org4d50be9"><span class="section-number-2">8</span> Locational Spreads</h2>
+<div id="outline-container-org4d90367" class="outline-2">
+<h2 id="org4d90367"><span class="section-number-2">8</span> Locational Spreads</h2>
 <div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li>Locational spreads hedge the cost of transportation from one point to another.</li>
@@ -406,7 +417,7 @@ Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida, Ph.D.</p>
-<p class="date">Created: 2020-04-21 Tue 23:01</p>
+<p class="date">Created: 2020-05-08 Fri 19:26</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -54,11 +54,13 @@ height: 300px //you can manually change this height
   crack_per_1 <- crack_bbl_1 / prices1$PET.RCLC1.D
 #+END_SRC
 
+#+RESULTS[f2e4d89e43687cc86a2dfef180e2c6cdd2743bb0]:
+
 #+BEGIN_SRC R :results graphics :file crack_bbl_1.png :exports both :cache yes :session crack
   plot(crack_bbl_1["2019/"])
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[28f2455411ae6109e39093ad306c942b7e2b991b]:
 [[file:crack_bbl_1.png]]
 
 
@@ -66,8 +68,24 @@ height: 300px //you can manually change this height
   plot(crack_per_1["2019/"])
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS[8fe64d4081fd023642fb5b57dc969611de54152d]:
 [[file:crack_per_1.png]]
+
+#  Lets try and save a htmlwidget and then insert it as an iframe--------
+
+#+BEGIN_SRC R :exports both :cache yes :session crack
+  library(highcharter)
+  library(htmlwidgets)
+  hc <- hchart(crack_per_1) %>% hc_add_theme(hc_theme_economist()) %>% hc_title(text = "Percent Refining Margin (% Crack Spread) Over Time", margin = 20, align = "left")
+  saveWidget(hc, "crack_per_1_widget.html")
+#+END_SRC
+
+#+RESULTS[cf7f17c5a9504d9f3b8154199670bc2234f1f2fe]:
+
+#+begin_export html
+<iframe width="100%" height="500px" frameBorder=0 src="./crack_per_1_widget.html"></iframe>
+#+end_export
+
 
 
 
