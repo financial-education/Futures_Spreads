@@ -1,6 +1,6 @@
 #+title: An Introduction to Futures Spreads
 #+author: Matt Brigida, Ph.D.
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="mystyle.css" />
 
 #+BEGIN_EXPORT html :eval no
