@@ -12,12 +12,20 @@
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 #+END_EXPORT
 
-
-* Refining
-
+Many market participants need to hedge against relative changes in prices rather than absolute changes.  For example, if your firm refines oil they only care about the relative price between their input (crude oil) and output (gasoline). Similarly, when a natural gas producer decides whether to sell or store gas, they care about the differential in prices between delivery months.  
 
 
-* Crack Spread Calculator
+* Refining Spreads
+
+Below we'll discuss 3 refining spreads: the crack; crush; and spark spreads.
+
+** Crack Spread
+
+Crude oil is refined (cracked) into heating oil and gasoline.  We use the term /crack/ because to refine the crude oil it is put into a tall column and heated, which causes the crude oil to separate (crack) into lighter gasoline and heavier heating oil.
+
+NYMEX Crude Oil (ticker CL) contracts are for 1000 barrels.
+
+** Crack Spread Calculator
 
 #+BEGIN_EXPORT html
 <style>
@@ -33,10 +41,14 @@ height: 300px //you can manually change this height
 
 # <script async src="//jsfiddle.net/mbkr1/od34mwxn/1/embed/js,html,css,result/dark/"></script>
 
+The calculator is here, but the link is not working:
+
+https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/
+
 * Crack Spread Over Time
 
 
-#+BEGIN_SRC R :exports both :results both :cache yes :session crack
+#+BEGIN_SRC R :exports both :results both :cache no :session crack :eval no
   library(EIAdata)
 
   key <- source("~/eia_key")$value
@@ -60,20 +72,18 @@ height: 300px //you can manually change this height
   plot(crack_bbl_1["2019/"])
 #+END_SRC
 
-#+RESULTS[28f2455411ae6109e39093ad306c942b7e2b991b]:
-[[file:crack_bbl_1.png]]
+#+RESULTS[1cbcf61b1e1ebc260148a66b5453f8f3858a703c]:
 
 
 #+BEGIN_SRC R :results graphics :file crack_per_1.png :exports both :cache yes :session crack
   plot(crack_per_1["2019/"])
 #+END_SRC
 
-#+RESULTS[8fe64d4081fd023642fb5b57dc969611de54152d]:
-[[file:crack_per_1.png]]
+#+RESULTS[dc082a035d3b8b93b914695ff765bb1614d08371]:
 
 #  Lets try and save a htmlwidget and then insert it as an iframe--------
 
-#+BEGIN_SRC R :exports both :cache yes :session crack
+#+BEGIN_SRC R :exports both :cache no :session crack :eval no
   library(highcharter)
   library(htmlwidgets)
   hc <- hchart(crack_per_1) %>% hc_add_theme(hc_theme_economist()) %>% hc_title(text = "Percent Refining Margin (% Crack Spread) Over Time", margin = 20, align = "left")
@@ -99,13 +109,20 @@ The Crush Spread is the refining margin on Soybeans.
 
 Calculation from here: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&download=yes
 
-$$Crush\ Spread\ =\ (Soybean\ Meal\ in\ $\ per\ ton\ x\ 100) + (Soybean\ Oil\ in\ $ per\ 100\ lbs.\ x\ 600) – (Soybeans\ in\ cents\ per\ bu.\ x\ 50)$$
+#+begin_comment
+$$ Crush\ Spread\ =\ (Soybean\ Meal\ in\ $\ per\ ton\ x\ 100) + (Soybean\ Oil\ in\ $ per\ 100\ lbs.\ x\ 600) – (Soybeans\ in\ cents\ per\ bu.\ x\ 50) $$
+#+end_comment
 
-
+Crush Spread = (Soybean Meal in $ per ton x 100) + (Soybean Oil in $ per 100 lbs. x 600) – (Soybeans in cents per bu. x 50)
 
 * Crush Spread Calculator
 
 #+BEGIN_EXPORT html
+<style>
+.fiddle iframe {
+height: 300px //you can manually change this height
+}
+</style>
 
 <div class="fiddle">
 <script async src="https://jsfiddle.net/mbkr1/hpur8feq/embed/result,js,html,css/dark/"></script>
