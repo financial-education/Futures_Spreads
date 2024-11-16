@@ -3,196 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-26 Mon 12:13 -->
+<!-- 2023-11-28 Tue 10:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>An Introduction to Futures Spreads</title>
 <meta name="author" content="Matt Brigida, Ph.D." />
 <meta name="generator" content="Org Mode" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,80 +16,58 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" type="text/css" href="mystyle.css" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">An Introduction to Futures Spreads</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga3e88a3">1. Refining</a></li>
-<li><a href="#org09710e4">2. Crack Spread Calculator</a></li>
-<li><a href="#org3bea390">3. Crack Spread Over Time</a></li>
-<li><a href="#org91aef3a">4. Crush Spread</a></li>
-<li><a href="#orgb53c48d">5. Calculating the Crush Spread</a></li>
-<li><a href="#org391e7e7">6. Crush Spread Calculator</a></li>
-<li><a href="#org1e392b9">7. Calendar Spreads</a></li>
-<li><a href="#orgcbd4433">8. Locational Spreads</a></li>
+<li><a href="#org82d4512">1. Refining Spreads</a>
+<ul>
+<li><a href="#orgad9042b">1.1. Crack Spread</a></li>
+<li><a href="#org253f437">1.2. Crack Spread Calculator</a></li>
+</ul>
+</li>
+<li><a href="#org7e7b4b7">2. Crack Spread Over Time</a></li>
+<li><a href="#org26b5c70">3. Crush Spread</a></li>
+<li><a href="#org1a88a62">4. Calculating the Crush Spread</a></li>
+<li><a href="#org067c7f4">5. Crush Spread Calculator</a></li>
+<li><a href="#org40bd1f0">6. Calendar Spreads</a></li>
+<li><a href="#org278f641">7. Locational Spreads</a></li>
 </ul>
 </div>
 </div>
+<p>
+Many market participants need to hedge against relative changes in prices rather than absolute changes.  For example, if your firm refines oil they only care about the relative price between their input (crude oil) and output (gasoline). Similarly, when a natural gas producer decides whether to sell or store gas, they care about the differential in prices between delivery months.  
+</p>
 
 
-<div id="outline-container-orga3e88a3" class="outline-2">
-<h2 id="orga3e88a3"><span class="section-number-2">1</span> Refining</h2>
+<div id="outline-container-org82d4512" class="outline-2">
+<h2 id="org82d4512"><span class="section-number-2">1.</span> Refining Spreads</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Below we'll discuss 3 refining spreads: the crack; crush; and spark spreads.
+</p>
 </div>
 
+<div id="outline-container-orgad9042b" class="outline-3">
+<h3 id="orgad9042b"><span class="section-number-3">1.1.</span> Crack Spread</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Crude oil is refined (cracked) into heating oil and gasoline.  We use the term <i>crack</i> because to refine the crude oil it is put into a tall column and heated, which causes the crude oil to separate (crack) into lighter gasoline and heavier heating oil.
+</p>
 
+<p>
+NYMEX Crude Oil (ticker CL) contracts are for 1000 barrels.
+</p>
+</div>
+</div>
 
-<div id="outline-container-org09710e4" class="outline-2">
-<h2 id="org09710e4"><span class="section-number-2">2</span> Crack Spread Calculator</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org253f437" class="outline-3">
+<h3 id="org253f437"><span class="section-number-3">1.2.</span> Crack Spread Calculator</h3>
+<div class="outline-text-3" id="text-1-2">
 <style>
 .fiddle iframe {
 height: 300px //you can manually change this height
@@ -283,46 +77,55 @@ height: 300px //you can manually change this height
 <div class="fiddle">
 <script async src="https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/"></script>
 </div>
+
+<p>
+The calculator is here:
+</p>
+
+<p>
+<a href="https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/">https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/</a>
+</p>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org3bea390" class="outline-2">
-<h2 id="org3bea390"><span class="section-number-2">3</span> Crack Spread Over Time</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org7e7b4b7" class="outline-2">
+<h2 id="org7e7b4b7"><span class="section-number-2">2.</span> Crack Spread Over Time</h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
-<pre class="src src-R">  <span style="color: #ff00ff;">library</span>(EIAdata)
+<pre class="src src-R"><span style="color: #268bd2; font-weight: bold;">library</span>(EIAdata)
 
-  key <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff00ff;">source</span>(<span style="color: #00ff00;">"~/eia_key"</span>)$value
+key <span style="color: #268bd2; font-weight: bold;">&lt;-</span> <span style="color: #268bd2; font-weight: bold;">source</span>(<span style="color: #2aa198;">"~/eia_key"</span>)$value
 
-  cl1 <span style="color: #ff00ff;">&lt;-</span> getEIA(<span style="color: #00ff00;">"PET.RCLC1.D"</span>, key=key)
-  rb1 <span style="color: #ff00ff;">&lt;-</span> getEIA(<span style="color: #00ff00;">"PET.EER_EPMRR_PE1_Y35NY_DPG.D"</span>, key = key)
-  ho1 <span style="color: #ff00ff;">&lt;-</span> getEIA(<span style="color: #00ff00;">"PET.EER_EPD2F_PE1_Y35NY_DPG.D"</span>, key = key)
+cl1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> getEIA(<span style="color: #2aa198;">"PET.RCLC1.D"</span>, key=key)
+rb1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> getEIA(<span style="color: #2aa198;">"PET.EER_EPMRR_PE1_Y35NY_DPG.D"</span>, key = key)
+ho1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> getEIA(<span style="color: #2aa198;">"PET.EER_EPD2F_PE1_Y35NY_DPG.D"</span>, key = key)
 
-  prices1 <span style="color: #ff00ff;">&lt;-</span> merge.xts(cl1, rb1, ho1)
+prices1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> merge.xts(cl1, rb1, ho1)
 
-  prices1 <span style="color: #ff00ff;">&lt;-</span> prices1[complete.cases(prices1), ]
+prices1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> prices1[complete.cases(prices1), ]
 
-  crack_bbl_1 <span style="color: #ff00ff;">&lt;-</span> <span style="color: #ff00ff;">42</span> * (<span style="color: #ff00ff;">2</span>/<span style="color: #ff00ff;">3</span>) * prices1$PET.EER_EPMRR_PE1_Y35NY_DPG.D + <span style="color: #ff00ff;">42</span> * (<span style="color: #ff00ff;">1</span>/<span style="color: #ff00ff;">3</span>) * prices1$PET.EER_EPD2F_PE1_Y35NY_DPG.D - prices1$PET.RCLC1.D
+crack_bbl_1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> 42 * (2/3) * prices1$PET.EER_EPMRR_PE1_Y35NY_DPG.D + 42 * (1/3) * prices1$PET.EER_EPD2F_PE1_Y35NY_DPG.D - prices1$PET.RCLC1.D
 
-  crack_per_1 <span style="color: #ff00ff;">&lt;-</span> crack_bbl_1 / prices1$PET.RCLC1.D
+crack_per_1 <span style="color: #268bd2; font-weight: bold;">&lt;-</span> crack_bbl_1 / prices1$PET.RCLC1.D
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-R">  plot(crack_bbl_1[<span style="color: #00ff00;">"2019/"</span>])
+<pre class="src src-R">plot(crack_bbl_1[<span style="color: #2aa198;">"2019/"</span>])
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-R">  plot(crack_per_1[<span style="color: #00ff00;">"2019/"</span>])
+<pre class="src src-R">plot(crack_per_1[<span style="color: #2aa198;">"2019/"</span>])
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-R">  <span style="color: #ff00ff;">library</span>(highcharter)
-  <span style="color: #ff00ff;">library</span>(htmlwidgets)
-  hc <span style="color: #ff00ff;">&lt;-</span> hchart(crack_per_1) <span style="color: #ff00ff;">%&gt;%</span> hc_add_theme(hc_theme_economist()) <span style="color: #ff00ff;">%&gt;%</span> hc_title(text = <span style="color: #00ff00;">"Percent Refining Margin (% Crack Spread) Over Time"</span>, margin = <span style="color: #ff00ff;">20</span>, align = <span style="color: #00ff00;">"left"</span>)
-  saveWidget(hc, <span style="color: #00ff00;">"crack_per_1_widget.html"</span>)
+<pre class="src src-R"><span style="color: #268bd2; font-weight: bold;">library</span>(highcharter)
+<span style="color: #268bd2; font-weight: bold;">library</span>(htmlwidgets)
+hc <span style="color: #268bd2; font-weight: bold;">&lt;-</span> hchart(crack_per_1) <span style="color: #268bd2; font-weight: bold;">%&gt;%</span> hc_add_theme(hc_theme_economist()) <span style="color: #268bd2; font-weight: bold;">%&gt;%</span> hc_title(text = <span style="color: #2aa198;">"Percent Refining Margin (% Crack Spread) Over Time"</span>, margin = 20, align = <span style="color: #2aa198;">"left"</span>)
+saveWidget(hc, <span style="color: #2aa198;">"crack_per_1_widget.html"</span>)
 </pre>
 </div>
 
@@ -333,9 +136,9 @@ height: 300px //you can manually change this height
 
 
 
-<div id="outline-container-org91aef3a" class="outline-2">
-<h2 id="org91aef3a"><span class="section-number-2">4</span> Crush Spread</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org26b5c70" class="outline-2">
+<h2 id="org26b5c70"><span class="section-number-2">3.</span> Crush Spread</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 The Crush Spread is the refining margin on Soybeans.   
 </p>
@@ -346,24 +149,27 @@ The Crush Spread is the refining margin on Soybeans.
 </div>
 </div>
 
-<div id="outline-container-orgb53c48d" class="outline-2">
-<h2 id="orgb53c48d"><span class="section-number-2">5</span> Calculating the Crush Spread</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org1a88a62" class="outline-2">
+<h2 id="org1a88a62"><span class="section-number-2">4.</span> Calculating the Crush Spread</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&amp;download=yes">https://papers.ssrn.com/sol3/papers.cfm?abstract_id=987507&amp;download=yes</a>
 </p>
 
 <p>
-\[Crush\ Spread\ =\ (Soybean\ Meal\ in\ $\ per\ ton\ x\ 100) + (Soybean\ Oil\ in\ $ per\ 100\ lbs.\ x\ 600) – (Soybeans\ in\ cents\ per\ bu.\ x\ 50)\]
+Crush Spread = (Soybean Meal in $ per ton x 100) + (Soybean Oil in $ per 100 lbs. x 600) – (Soybeans in cents per bu. x 50)
 </p>
 </div>
 </div>
 
-
-
-<div id="outline-container-org391e7e7" class="outline-2">
-<h2 id="org391e7e7"><span class="section-number-2">6</span> Crush Spread Calculator</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org067c7f4" class="outline-2">
+<h2 id="org067c7f4"><span class="section-number-2">5.</span> Crush Spread Calculator</h2>
+<div class="outline-text-2" id="text-5">
+<style>
+.fiddle iframe {
+height: 300px //you can manually change this height
+}
+</style>
 
 <div class="fiddle">
 <script async src="https://jsfiddle.net/mbkr1/hpur8feq/embed/result,js,html,css/dark/"></script>
@@ -373,18 +179,18 @@ Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract
 
 
 
-<div id="outline-container-org1e392b9" class="outline-2">
-<h2 id="org1e392b9"><span class="section-number-2">7</span> Calendar Spreads</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org40bd1f0" class="outline-2">
+<h2 id="org40bd1f0"><span class="section-number-2">6.</span> Calendar Spreads</h2>
+<div class="outline-text-2" id="text-6">
 <ul class="org-ul">
 <li>Calendar spreads can hedge storage costs.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcbd4433" class="outline-2">
-<h2 id="orgcbd4433"><span class="section-number-2">8</span> Locational Spreads</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org278f641" class="outline-2">
+<h2 id="org278f641"><span class="section-number-2">7.</span> Locational Spreads</h2>
+<div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>Locational spreads hedge the cost of transportation from one point to another.</li>
 </ul>
@@ -393,7 +199,8 @@ Calculation from here: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida, Ph.D.</p>
-<p class="date">Created: 2021-04-26 Mon 12:13</p>
+<p class="date">Created: 2023-11-28 Tue 10:24</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

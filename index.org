@@ -48,7 +48,7 @@ https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/
 * Crack Spread Over Time
 
 
-#+BEGIN_SRC R :exports both :results both :cache no :session crack :eval no
+#+BEGIN_SRC R :exports both :results both :cache no :session crack :eval yes
   library(EIAdata)
 
   key <- source("~/eia_key")$value
@@ -83,7 +83,7 @@ https://jsfiddle.net/mbkr1/g6rkdq85/embed/result,js,html,css/dark/
 
 #  Lets try and save a htmlwidget and then insert it as an iframe--------
 
-#+BEGIN_SRC R :exports both :cache no :session crack :eval no
+#+BEGIN_SRC R :exports both :cache no :session crack :eval yes
   library(highcharter)
   library(htmlwidgets)
   hc <- hchart(crack_per_1) %>% hc_add_theme(hc_theme_economist()) %>% hc_title(text = "Percent Refining Margin (% Crack Spread) Over Time", margin = 20, align = "left")
